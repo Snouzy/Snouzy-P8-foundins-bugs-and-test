@@ -83,15 +83,7 @@
 
       callback = callback || function() {};
 
-      // Generate an ID
-      var newId = "";
-      var charset = "0123456789";
-
-      for (var i = 0; i < 6; i++) {
-         newId += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-
-      // If an ID was actually given, find the item and update each property
+      // If an ID was actually given, (= if the todo exist) find the item and update each property
       if (id) {
          for (var i = 0; i < todos.length; i++) {
             if (todos[i].id === id) {
@@ -101,11 +93,39 @@
                break;
             }
          }
-
          localStorage[this._dbName] = JSON.stringify(data);
          callback.call(this, todos);
       } else {
-         // Assign an ID
+         // if the item is not existing :
+         var newId = "";
+         var charset = "0123456789";
+         //check if it his already at least 1 intem into the todo list
+         if (todos.length) {
+            var isUsed = true; //simulate that the id is already used to loop
+            while (isUsed) {
+               //create another ID with 6 digits
+               for (var i = 0; i < 6; i++) {
+                  newId += charset.charAt(
+                     Math.floor(Math.random() * charset.length)
+                  );
+               }
+
+               //check if this ID is not already used by another item
+               if (todos.find(x => x.id === newId)) {
+                  isUsed = true;
+               } else {
+                  isUsed = false;
+               }
+            }
+         } else {
+            //if we enter here, the todo list is empty :
+            for (var i = 0; i < 6; i++) {
+               newId += charset.charAt(
+                  Math.floor(Math.random() * charset.length)
+               );
+            }
+         }
+         //Assignthe the created ID
          updateData.id = parseInt(newId);
 
          todos.push(updateData);
