@@ -1,6 +1,6 @@
 /*jshint eqeqeq:false */
 (function(window) {
-   "use strict";
+   'use strict';
 
    /**
     * Creates a new client side storage object and will create an empty
@@ -84,8 +84,9 @@
       callback = callback || function() {};
 
       // If an ID was actually given, (= if the todo exist) find the item and update each property
+      const length = todos.length;
       if (id) {
-         for (var i = 0; i < todos.length; i++) {
+         for (var i = 0; i < length; i++) {
             if (todos[i].id === id) {
                for (var key in updateData) {
                   todos[i][key] = updateData[key];
@@ -97,8 +98,8 @@
          callback.call(this, todos);
       } else {
          // if the item is not existing :
-         var newId = "";
-         var charset = "0123456789";
+         var newId = '';
+         var charset = '0123456789';
          //check if it his already at least 1 intem into the todo list
          if (todos.length) {
             var isUsed = true; //simulate that the id is already used to loop
@@ -144,14 +145,14 @@
       var data = JSON.parse(localStorage[this._dbName]);
       var todos = data.todos;
       var todoId;
-
-      for (var i = 0; i < todos.length; i++) {
+      var length = todos.length;
+      for (var i = 0; i < length; i++) {
          if (todos[i].id == id) {
             todoId = todos[i].id;
          }
       }
 
-      for (var i = 0; i < todos.length; i++) {
+      for (var i = 0; i < length; i++) {
          if (todos[i].id == todoId) {
             todos.splice(i, 1);
          }
