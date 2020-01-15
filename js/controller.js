@@ -120,7 +120,6 @@
     */
    Controller.prototype.editItemSave = function(id, title) {
       var self = this;
-
       title = title.trim();
 
       if (title.length !== 0) {
