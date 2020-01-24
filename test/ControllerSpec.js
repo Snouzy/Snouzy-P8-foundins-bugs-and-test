@@ -71,7 +71,7 @@ describe('controller', function() {
       setUpModel([todo]);
       // init the route to default
       subject.setView('');
-
+      // Verify that render one empty todo
       expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
    });
 
@@ -181,7 +181,23 @@ describe('controller', function() {
       setUpModel([todo]);
 
       subject.setView('#/active');
+      //verify that the active button is selected
       expect(view.render).toHaveBeenCalledWith('setFilter', 'active');
+   });
+
+   it('should highlight "Completed" filter when switching to completed view', function() {
+      // TODO: write test
+      var todo = {
+         title: 'my todo',
+         completed: true
+      };
+
+      setUpModel([todo]);
+
+      subject.setView('#/completed');
+
+      //verify that the active button is selected
+      expect(view.render).toHaveBeenCalledWith('setFilter', 'completed');
    });
 
    describe('toggle all', function() {
@@ -197,7 +213,7 @@ describe('controller', function() {
          subject.setView('');
          view.trigger('toggleAll', { completed: true });
 
-         //updating to see if the todos are completed
+         //updating to see if the todos are nicely completed
          expect(model.update).toHaveBeenCalledWith(
             1,
             { completed: true },
@@ -218,8 +234,11 @@ describe('controller', function() {
          ];
          setUpModel(todos);
          subject.setView('');
+
+         //like a click on the button
          view.trigger('toggleAll', { completed: true });
 
+         //expected to update completed to true
          expect(view.render).toHaveBeenCalledWith('elementComplete', {
             id: 1,
             completed: true
@@ -294,6 +313,8 @@ describe('controller', function() {
          setUpModel([todo]);
          subject.setView('');
          view.trigger('itemRemove', { id: 1 });
+
+         //should remove the right element (1)
          expect(model.remove).toHaveBeenCalledWith(1, jasmine.any(Function));
       });
 
