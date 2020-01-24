@@ -77,7 +77,7 @@
          template = template.replace('{{completed}}', completed);
          template = template.replace('{{checked}}', checked);
 
-         view = view + template;
+         view += template;
       }
 
       return view;
