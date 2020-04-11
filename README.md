@@ -5,3 +5,4 @@ Reprise du code d'un autre développeur : mise en place de tests unitaires & opt
 
 
 ## [Allez voir le wiki](https://github.com/Snouzy/Snouzy-P8-foundins-bugs-and-test/wiki/Accueil)
+Détailé, gifs, screens, benchmarks... !
